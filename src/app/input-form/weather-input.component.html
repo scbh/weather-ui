@@ -1,0 +1,100 @@
+<section class="bg-light w-80 p-5 position-relative mx-auto"> 
+    <div class="container text-center">
+        <div class="container mx-auto ">
+            <div class="card">
+                <div class="card-body ml-5 mr-5">
+                    <div>
+                        <h3>Please Enter City or Zipcode</h3>
+                    </div>
+                    <form class="form-group" (submit)="callWeatherapi(searchBarValue, searchBarUnit)">
+                        <div class="input-group mb-5 mt-5 w-80">
+                            <input type="search" name="searchBarValue" [(ngModel)]="searchBarValue" 
+                            class="form-control" placeholder="City or Zipcode" aria-label="City or Zipcode" aria-describedby="basic-addon1">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary btn-lg" type="submit"> Search </button>
+                            </div>
+                        </div>
+        
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group mr-5" for="inputGroupSelect01">Weather Unit</label>
+                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-custom">
+                                        <input type="radio" aria-label="Radio button for following text input" name="searchBarUnit" [(ngModel)]="searchBarUnit" ngValue="default" id="default">
+                                        <label class="control-label font-weight-normal" for="default">Kelvin</label>
+                                    </span>
+                                    <span class="input-group-custom">
+                                        <input type="radio" aria-label="Radio button for following text input" name="searchBarUnit" [(ngModel)]="searchBarUnit" value="imperial" id="imperial">
+                                        <label class="control-label font-weight-normal" for="imperial">Fahrenheit</label>
+                                    </span>
+                                    
+                                    <span class="input-group-custom">
+                                        <input type="radio" aria-label="Radio button for following text input" name="searchBarUnit" [(ngModel)]="searchBarUnit" value="metric" id="metric">
+                                        <label class="control-label font-weight-normal" for="metric">Celsius</label>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container bg-light w-80 pb-5 pr-5 pl-5 position-relative mx-auto" *ngIf="condition && !error"> 
+    <div class="container">
+      <div class="col-lg-12 mx-auto text-center">
+            <div class="card w-60">
+                <div class="card-body ml-5 mr-5">
+                    <h3 class="section-heading text-black">Current Weather</h3>
+                    <hr class="light">
+
+                    <div class="card container border-unset" style="width: 75rem;">
+                        <div class="row">
+                            <div class="card card-width ml-4 mr-4 mb-4 border-unset">
+                                <div class="card-body ml-5 mr-5">
+                                    <div class="card-body">
+                                        <img class="card-img-top w-80 icon-align" src="http://openweathermap.org/img/w/10d.png" alt="{{condition.currentCondition}}">
+                                        <span class="card-title icon-align">{{condition.currentTemp | number:'1.0-0'}} &deg;
+                                            <span class="badge badge-pill badge-secondary icon-align degree" *ngIf="unit === 'metric'">C</span>
+                                            <span class="badge badge-pill badge-secondary icon-align degree" *ngIf="unit === 'imperial'">F</span>
+                                            <span class="badge badge-pill badge-secondary icon-align degree" *ngIf="unit == undefined || unit === 'default'">K</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card text-left card-width m-4 border-unset">
+                                <div class="card-body ml-5 mr-5">
+                                    <div class="card-body pt-5">
+                                        <h2 class="card-text font-weight-bold">{{condition.location}}</h2>
+                                        <p class="card-text font-weight-bold">{{condition.currentCondition}}</p>
+
+                                        <div class="pt-5 smaller-font">
+                                            <p class="card-text"><span class="font-weight-bold">Highest Temperature:</span> {{condition.highTemp | number:'1.0-0'}}</p>
+                                            <p class="card-text"><span class="font-weight-bold">Lowest Temperature: </span>{{condition.lowestTemp | number:'1.0-0'}}</p>
+                                            <p class="card-text"><span class="font-weight-bold">Latitude: </span>{{condition.lat}}</p>
+                                            <p class="card-text"><span class="font-weight-bold">Longitude: </span>{{condition.lon}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+    
+</section>
+
+<section class="container bg-light w-80 pb-5 pr-5 pl-5 position-relative mx-auto" *ngIf="error"> 
+    <div class="container">
+        <div class="col-lg-12 mx-auto text-center format-error">
+            <!-- <img class="card-img-top w-75 icon-align" src="../../assets/icons/error_cloud.png" alt="{{condition.currentCondition}}"> -->
+            <p>{{error}}</p>
+        </div>
+    </div>
+</section>

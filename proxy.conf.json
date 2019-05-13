@@ -1,0 +1,9 @@
+{
+  "/weather":{
+    "target":"http://localhost:8999/resources/v1/weatherinfo",
+    "changeOrigin": true,
+    "secure": false,
+    "logLevel":"debug",
+    "pathRewrite": {"^/weather": ""}
+  }
+}

@@ -1,0 +1,39 @@
+
+.icon-align {
+    align-self: left;
+}
+
+.border-unset {
+    border:unset;
+}
+.card-width {
+    width:46%;
+}
+
+.card-title {
+    font-size: 5rem
+}
+
+.degree {
+    font-size: 1.3rem
+}
+
+.btn-lg{
+    font-size: 1.45rem;
+}
+
+.smaller-font {
+    font-size: 1.2rem;
+}
+
+.control-label {
+    margin-left: 9px;
+}
+
+.input-group-custom {
+    margin: 10px;
+}
+
+.format-error {
+    color: red;
+}
